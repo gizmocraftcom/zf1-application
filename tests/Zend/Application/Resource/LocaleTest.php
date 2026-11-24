@@ -20,14 +20,17 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_LocaleTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -120,9 +123,7 @@ class Zend_Application_Resource_LocaleTest extends PHPUnit\Framework\TestCase
         $this->assertSame(Zend_Registry::get('Zend_Locale'), $locale);
     }
 
-    /**
-     * @group ZF-7058
-     */
+    #[Group('ZF-7058')]
     public function testSetCache()
     {
         $cache = Zend_Cache::factory('Core', 'Black Hole', array(
@@ -141,9 +142,7 @@ class Zend_Application_Resource_LocaleTest extends PHPUnit\Framework\TestCase
         Zend_Locale::removeCache();
     }
 
-    /**
-     * @group ZF-7058
-     */
+    #[Group('ZF-7058')]
     public function testSetCacheFromCacheManager()
     {
         $configCache = array(

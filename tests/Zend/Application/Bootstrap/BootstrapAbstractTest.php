@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +29,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -123,9 +126,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertEquals('foo', $bootstrap->getArbitrary());
     }
 
-    /**
-     * @group ZF-6459
-     */
+    #[Group('ZF-6459')]
     public function testCallingSetOptionsMultipleTimesShouldMergeOptionsRecursively()
     {
         require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
@@ -359,9 +360,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertEquals(1, $bootstrap->fooExecuted);
     }
 
-    /**
-     * @group ZF-7955
-     */
+    #[Group('ZF-7955')]
     public function testBootstrappingIsCaseInsensitive()
     {
         require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
@@ -520,9 +519,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertEquals('Baz', $resource->baz);
     }
 
-    /**
-     * @group ZF-6543
-     */
+    #[Group('ZF-6543')]
     public function testPassingPluginResourcesByFullClassNameWithMatchingPluginPathShouldRegisterAsShortName()
     {
         $this->application->setOptions(array(
@@ -537,9 +534,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertTrue($bootstrap->hasPluginResource('View'), var_export(array_keys($bootstrap->getPluginResources()), 1));
     }
 
-    /**
-     * @group ZF-6543
-     */
+    #[Group('ZF-6543')]
     public function testPassingFullViewClassNameNotMatchingARegisteredPrefixShouldRegisterAsTheClassName()
     {
         $this->application->setOptions(array(
@@ -551,9 +546,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertTrue($bootstrap->hasPluginResource('Zend_Application_Bootstrap_BootstrapAbstractTest_View'));
     }
 
-    /**
-     * @group ZF-6543
-     */
+    #[Group('ZF-6543')]
     public function testPassingFullViewClassNameNotMatchingARegisteredPrefixShouldReturnAppropriateResource()
     {
         $this->application->setOptions(array(
@@ -567,9 +560,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertInstanceOf(Zend_Application_Bootstrap_BootstrapAbstractTest_View::class, $resource, var_export(array_keys($bootstrap->getPluginResources()), 1));
     }
 
-    /**
-     * @group ZF-6543
-     */
+    #[Group('ZF-6543')]
     public function testCanMixAndMatchPluginResourcesAndFullClassNames()
     {
         $this->application->setOptions(array(
@@ -588,9 +579,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertInstanceOf(Zend_View::class, $resource2);
     }
 
-    /**
-     * @group ZF-6543
-     */
+    #[Group('ZF-6543')]
     public function testPluginClassesDefiningExplicitTypeWillBeRegisteredWithThatValue()
     {
         $this->application->setOptions(array(
@@ -609,9 +598,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertInstanceOf(Zend_Layout::class, $resource2);
     }
 
-    /**
-     * @group ZF-6471
-     */
+    #[Group('ZF-6471')]
     public function testBootstrapShouldPassItselfToResourcePluginConstructor()
     {
         $this->application->setOptions(array(
@@ -627,9 +614,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertTrue($resource->bootstrapSetInConstructor, var_export(get_object_vars($resource), 1));
     }
 
-    /**
-     * @group ZF-6591
-     */
+    #[Group('ZF-6591')]
     public function testRequestingPluginsByShortNameShouldNotRaiseFatalErrors()
     {
         $this->autoloader->setFallbackAutoloader(true)
@@ -646,10 +631,8 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertTrue(false === $this->error, $this->error);
     }
 
-    /**
-     * @group ZF-7550
-     * @doesNotPerformAssertions
-     */
+    #[Group('ZF-7550')]
+    #[DoesNotPerformAssertions]
     public function testRequestingPluginsByAutoloadableClassNameShouldNotRaiseFatalErrors()
     {
         // Using namesapce 'zabt' to prevent conflict with Zend namespace
@@ -668,9 +651,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $bootstrap->bootstrap();
     }
 
-    /**
-     * @group ZF-7690
-     */
+    #[Group('ZF-7690')]
     public function testCallingSetOptionsMultipleTimesShouldUpdateOptionKeys()
     {
         $this->application->setOptions(array(
@@ -689,9 +670,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @group ZF-9110
-     */
+    #[Group('ZF-9110')]
     public function testPassingSameBootstrapAsApplicationShouldNotCauseRecursion()
     {
         $this->expectException(\Zend_Application_Bootstrap_Exception::class);
@@ -700,10 +679,8 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $bootstrap->setApplication($bootstrap);
     }
 
-    /**
-     * @group ZF-7696
-     * @doesNotPerformAssertions
-     */
+    #[Group('ZF-7696')]
+    #[DoesNotPerformAssertions]
     public function testUsingFallbackAutoloaderWithModulesShouldNotResultInFrontcontrollerNotFoundWarning()
     {
         require_once dirname(__FILE__) . '/../_files/Zf7696Bootstrap.php';
@@ -718,9 +695,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $bootstrap->bootstrap(array('modules'));
     }
 
-    /**
-     * @group ZF-10199
-     */
+    #[Group('ZF-10199')]
     public function testHasOptionShouldTreatOptionKeysAsCaseInsensitive()
     {
         $application = $this->application;
@@ -730,9 +705,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertTrue($application->getBootstrap()->hasOption('FooBar'));
     }
 
-    /**
-     * @group ZF-10199
-     */
+    #[Group('ZF-10199')]
     public function testGetOptionShouldTreatOptionKeysAsCaseInsensitive()
     {
         $application = $this->application;
@@ -742,10 +715,8 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit\Framework
         $this->assertEquals('baz', $application->getBootstrap()->getOption('FooBar'));
     }
 
-    /**
-     * @group ZF-8751
-     * @group ZF-10842
-     */
+    #[Group('ZF-8751')]
+    #[Group('ZF-10842')]
     public function testPathDefaultZendXToPluginsResources()
     {
         $application = $this->application

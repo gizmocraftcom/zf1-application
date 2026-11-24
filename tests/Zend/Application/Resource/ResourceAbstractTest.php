@@ -20,14 +20,17 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -149,9 +152,7 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit\Framework\T
         $this->assertEquals($options, $resource->getOptions());
     }
 
-    /**
-     * @group ZF-6593
-     */
+    #[Group('ZF-6593')]
     public function testSetOptionsShouldRemoveBootstrapOptionWhenPassed()
     {
         require_once dirname(__FILE__) . '/../_files/resources/Foo.php';
@@ -164,9 +165,7 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit\Framework\T
         $this->assertNotContains('bootstrap', array_keys($options));
     }
 
-    /**
-     * @group ZF-8520
-     */
+    #[Group('ZF-8520')]
     public function testFirstResourceOptionShouldNotBeDropped()
     {
         require_once dirname(__FILE__) . '/../_files/resources/Foo.php';

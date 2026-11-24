@@ -20,14 +20,17 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Module_BootstrapTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -112,9 +115,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('baz', $bootstrap->foo);
     }
 
-    /**
-     * @group ZF-6545
-     */
+    #[Group('ZF-6545')]
     public function testFrontControllerPluginResourceShouldBeRegistered()
     {
         require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
@@ -122,9 +123,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($bootstrap->hasPluginResource('FrontController'));
     }
 
-    /**
-     * @group ZF-6545
-     */
+    #[Group('ZF-6545')]
     public function testFrontControllerStateRemainsSameIfNoOptionsPassedToModuleBootstrap()
     {
         require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
@@ -156,9 +155,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(dirname(__FILE__), $test->getControllerDirectory('default'));
     }
 
-    /**
-     * @group ZF-6545
-     */
+    #[Group('ZF-6545')]
     public function testModuleBootstrapsShouldNotAcceptModuleResourceInOrderToPreventRecursion()
     {
         require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
@@ -188,9 +185,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit\Framework\TestCase
         }
     }
 
-    /**
-     * @group ZF-6567
-     */
+    #[Group('ZF-6567')]
     public function testModuleBootstrapShouldInheritApplicationBootstrapPluginPaths()
     {
         require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';

@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -112,9 +114,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit\Framework\Te
         $this->assertEquals(dirname(__FILE__), $dir);
     }
 
-    /**
-     * @group ZF-6458
-     */
+    #[Group('ZF-6458')]
     public function testAllControllerDirectoriesShouldBeSetWhenArrayPassedToControllerDirectoryOption()
     {
         $resource = new Zend_Application_Resource_Frontcontroller(array(
@@ -175,9 +175,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit\Framework\Te
         $this->assertEquals($expected, $dir);
     }
 
-    /**
-     * @group ZF-9258
-     */
+    #[Group('ZF-9258')]
     public function testShouldSetMultipleModuleDirectorysWhenOptionPresent()
     {
         $resource = new Zend_Application_Resource_Frontcontroller(array(
@@ -312,9 +310,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit\Framework\Te
         $this->assertNull($front->getBaseUrl());
     }
 
-    /**
-     * @group ZF-9044
-     */
+    #[Group('ZF-9044')]
     public function testSettingOfRegisterPluginIndexActuallyWorks()
     {
         $plugins = array(
@@ -345,9 +341,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit\Framework\Te
         }
     }
 
-    /**
-     * @group ZF-7367
-     */
+    #[Group('ZF-7367')]
     public function testPassingReturnResponseFlagShouldAlterFrontControllerStatus()
     {
         $resource = new Zend_Application_Resource_Frontcontroller(array(
@@ -358,9 +352,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit\Framework\Te
         $this->assertTrue($front->returnResponse());
     }
 
-    /**
-     * @group ZF-9724
-     */
+    #[Group('ZF-9724')]
     public function testShouldSetDispatcherFromConfiguration()
     {
         $resource = new Zend_Application_Resource_Frontcontroller(array(

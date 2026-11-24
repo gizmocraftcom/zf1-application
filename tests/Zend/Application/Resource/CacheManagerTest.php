@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_CacheManagerTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -157,9 +159,7 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit\Framework\TestC
         $this->assertInstanceOf(Zend_Cache_Core::class, $cache);
     }
 
-    /**
-     * @group ZF-9738
-     */
+    #[Group('ZF-9738')]
     public function testZendServer()
     {
         if (!function_exists('zend_disk_cache_store')) {
@@ -185,9 +185,7 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit\Framework\TestC
         $this->assertInstanceOf(Zend_Cache_Backend_ZendServer_Disk::class, $cache);
     }
 
-    /**
-     * @group ZF-9737
-     */
+    #[Group('ZF-9737')]
     public function testCustomFrontendBackendNaming()
     {
         $options = array(
@@ -207,9 +205,7 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit\Framework\TestC
         $this->assertInstanceOf(Zend_Cache_Frontend_CustomNaming::class, $cache);
     }
 
-    /**
-     * @group GH-103
-     */
+    #[Group('GH-103')]
     public function testLoggerFactory()
     {
         $options = array(

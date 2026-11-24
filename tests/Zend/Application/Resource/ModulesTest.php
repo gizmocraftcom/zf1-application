@@ -20,14 +20,17 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_ModulesTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -85,10 +88,8 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit\Framework\TestCase
         $this->assertFalse(isset($this->bootstrap->bar));
     }
 
-    /**
-     * @group ZF-6803
-     * @group ZF-7158
-     */
+    #[Group('ZF-6803')]
+    #[Group('ZF-7158')]
     public function testInitializationTriggersDefaultModuleBootstrapWhenDiffersFromApplicationBootstrap()
     {
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
@@ -112,10 +113,8 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($this->bootstrap->bar, 'bar failed');
     }
 
-    /**
-     * @group ZF-6803
-     * @group ZF-7158
-     */
+    #[Group('ZF-6803')]
+    #[Group('ZF-7158')]
     public function testInitializationShouldSkipModulesWithoutBootstraps()
     {
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
@@ -132,10 +131,8 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('default', (array)$bootstraps);
     }
 
-    /**
-     * @group ZF-6803
-     * @group ZF-7158
-     */
+    #[Group('ZF-6803')]
+    #[Group('ZF-7158')]
     public function testShouldReturnExecutedBootstrapsWhenComplete()
     {
         $this->bootstrap->registerPluginResource('Frontcontroller', array(
@@ -162,9 +159,7 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit\Framework\TestCase
         $this->assertCount(3, (array)$bootstraps);
     }
 
-    /**
-     * @group ZF-11548
-     */
+    #[Group('ZF-11548')]
     public function testGetExecutedBootstrapsShouldReturnArrayObject()
     {
         $this->bootstrap->registerPluginResource('Frontcontroller', array(

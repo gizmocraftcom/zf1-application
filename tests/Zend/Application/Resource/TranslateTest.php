@@ -20,14 +20,17 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_TranslateTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -131,9 +134,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit\Framework\TestCase
         }
     }
 
-    /**
-     * @group ZF-7352
-     */
+    #[Group('ZF-7352')]
     public function testTranslationIsAddedIfRegistryKeyExistsAlready()
     {
         $options1 = array('foo' => 'bar');
@@ -153,9 +154,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('shouldNotExist', $translate->translate('shouldNotExist'));
     }
 
-    /**
-     * @group ZF-10034
-     */
+    #[Group('ZF-10034')]
     public function testSetCacheFromCacheManager()
     {
         $configCache = array(
@@ -184,9 +183,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit\Framework\TestCase
         Zend_Translate::removeCache();
     }
 
-    /**
-     * @group ZF-10352
-     */
+    #[Group('ZF-10352')]
     public function testToUseTheSameKeyAsTheOptionsZendTranslate()
     {
         $options = array(
@@ -205,9 +202,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('message2', $translator->_('m2'));
     }
 
-    /**
-     * @group ZF-10352
-     */
+    #[Group('ZF-10352')]
     public function testToUseTheTwoKeysContentAndDataShouldThrowsException()
     {
         $this->expectException(\Zend_Application_Resource_Exception::class);
@@ -229,9 +224,7 @@ class Zend_Application_Resource_TranslateTest extends PHPUnit\Framework\TestCase
         $translator = $resource->init();
     }
 
-    /**
-     * @group GH-103
-     */
+    #[Group('GH-103')]
     public function testLogFactory()
     {
         $options                    = $this->_translationOptions;

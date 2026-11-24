@@ -20,14 +20,18 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_LogTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -113,10 +117,8 @@ class Zend_Application_Resource_LogTest extends PHPUnit\Framework\TestCase
         $this->assertStringContainsString($message, stream_get_contents($stream));
     }
 
-    /**
-     * @group ZF-8602
-     * @doesNotPerformAssertions
-     */
+    #[Group('ZF-8602')]
+    #[DoesNotPerformAssertions]
     public function testNumericLogStreamFilterParamsPriorityDoesNotFail()
     {
         $options = array(
@@ -137,9 +139,7 @@ class Zend_Application_Resource_LogTest extends PHPUnit\Framework\TestCase
         $resource->init();
     }
 
-    /**
-     * @group ZF-9790
-     */
+    #[Group('ZF-9790')]
     public function testInitializationWithFilterAndFormatter()
     {
         $stream  = fopen('php://memory', 'w+');

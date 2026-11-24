@@ -20,14 +20,17 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -115,17 +118,13 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit\Framework\TestCas
         $this->assertTrue($this->bootstrap->getContainer()->zfappbootstrap);
     }
 
-    /**
-     * @group ZF-8496
-     */
+    #[Group('ZF-8496')]
     public function testBootstrapModuleAutoloaderShouldNotBeInitializedByDefault()
     {
         $this->assertFalse($this->bootstrap->getResourceLoader() instanceof Zend_Application_Module_Autoloader);
     }
 
-    /**
-     * @group ZF-8496
-     */
+    #[Group('ZF-8496')]
     public function testBootstrapShouldInitializeModuleAutoloaderWhenNamespaceSpecified()
     {
         $application = new Zend_Application('testing', array(
@@ -139,9 +138,7 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit\Framework\TestCas
         $this->assertEquals('Application', $al->getNamespace());
     }
 
-    /**
-     * @group ZF-8496
-     */
+    #[Group('ZF-8496')]
     public function testBootstrapAutoloaderNamespaceShouldBeConfigurable()
     {
         $application = new Zend_Application('testing', array(
@@ -154,9 +151,7 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit\Framework\TestCas
         $this->assertEquals('Default', $al->getNamespace());
     }
 
-    /**
-     * @group ZF-9435
-     */
+    #[Group('ZF-9435')]
     public function testBootstrapShouldInitializeModuleAutoloaderWhenNamespaceSpecifiedAsEmpty()
     {
         $application = new Zend_Application(
@@ -177,9 +172,7 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit\Framework\TestCas
         $this->assertEquals('', $al->getNamespace());
     }
 
-    /**
-     * @group ZF-7367
-     */
+    #[Group('ZF-7367')]
     public function testBootstrapRunMethodShouldReturnResponseIfFlagEnabled()
     {
         $this->bootstrap->setOptions(array(

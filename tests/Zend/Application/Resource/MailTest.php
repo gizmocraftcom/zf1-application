@@ -20,14 +20,17 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_MailTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -149,9 +152,7 @@ class Zend_Application_Resource_MailTest extends PHPUnit\Framework\TestCase
         $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);
     }
 
-    /**
-    * @group ZF-8811
-    */
+    #[Group('ZF-8811')]
     public function testDefaultsCaseSensivity()
     {
         $options = array('defaultFroM'    => array('email' => 'f00@example.com', 'name' => null),
@@ -166,9 +167,7 @@ class Zend_Application_Resource_MailTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($options['defAultReplyTo'], Zend_Mail::getDefaultReplyTo());
     }
 
-    /**
-     * @group ZF-8981
-     */
+    #[Group('ZF-8981')]
     public function testNumericRegisterDirectiveIsPassedOnCorrectly()
     {
         $options = array('transport' => array('type'     => 'sendmail',
@@ -181,9 +180,7 @@ class Zend_Application_Resource_MailTest extends PHPUnit\Framework\TestCase
         $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);
     }
 
-    /**
-     * @group ZF-9136
-     */
+    #[Group('ZF-9136')]
     public function testCustomMailTransportWithFQName()
     {
         $options  = array('transport' => array('type' => 'Zend_Mail_Transport_Sendmail'));
@@ -194,9 +191,7 @@ class Zend_Application_Resource_MailTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($resource->init() instanceof Zend_Mail_Transport_Sendmail);
     }
 
-    /**
-     * @group ZF-9136
-     */
+    #[Group('ZF-9136')]
     public function testCustomMailTransportWithWrongCasesAsShouldBe()
     {
         $options  = array('transport' => array('type' => 'Zend_Application_Resource_mailTestCAsE'));
@@ -207,9 +202,7 @@ class Zend_Application_Resource_MailTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($resource->init() instanceof Zend_Application_Resource_mailTestCAsE);
     }
 
-    /**
-     * @group ZF-11022
-     */
+    #[Group('ZF-11022')]
     public function testOptionRegisterIsUnset()
     {
         $options = array('transport' =>

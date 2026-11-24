@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_Resource_ViewTest extends PHPUnit\Framework\TestCase
 {
     protected $bootstrap;
@@ -110,9 +112,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('XHTML1_FRAMESET', $view->doctype()->getDoctype());
     }
 
-    /**
-     * @group ZF-10343
-     */
+    #[Group('ZF-10343')]
     public function testContentTypeIsSet()
     {
         $contentType    = 'text/html; charset=UTF-8';
@@ -135,9 +135,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit\Framework\TestCase
             ->deleteContainer('Zend_View_Helper_HeadMeta');
     }
 
-    /**
-     * @group ZF-10343
-     */
+    #[Group('ZF-10343')]
     public function testSetMetaCharsetForHtml5()
     {
         $charset = 'UTF-8';
@@ -166,9 +164,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit\Framework\TestCase
         $registry->deleteContainer('Zend_View_Helper_Doctype');
     }
 
-    /**
-     * @group ZF-10343
-     */
+    #[Group('ZF-10343')]
     public function testSetMetaCharsetShouldOnlyAvailableForHtml5()
     {
         $charset = 'UTF-8';
@@ -197,9 +193,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit\Framework\TestCase
         $registry->deleteContainer('Zend_View_Helper_Doctype');
     }
 
-    /**
-     * @group ZF-10042
-     */
+    #[Group('ZF-10042')]
     public function testAssignmentsAreSet()
     {
         $options = array(
@@ -215,9 +209,7 @@ class Zend_Application_Resource_ViewTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('barbazoo', $view->bar);
     }
 
-    /**
-     * @group ZF-11579
-     */
+    #[Group('ZF-11579')]
     public function testViewResourceDoesNotReinjectViewRenderer()
     {
         require_once dirname(__FILE__) . '/TestAsset/ViewRenderer.php';

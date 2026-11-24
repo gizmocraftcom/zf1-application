@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,8 +29,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Application
+
  */
+#[Group('Zend_Application')]
 class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
 {
     protected $loaders;
@@ -100,10 +103,8 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($options, $application->getOptions());
     }
 
-    /**
-     * @group GH-564
-     * @depends testConstructorInstantiatesAutoloader
-     */
+    #[Group('GH-564')]
+    #[Depends('testConstructorInstantiatesAutoloader')]
     public function testConstructorRespectsSuppressFileNotFoundWarningFlag()
     {
         $application = new Zend_Application('testing');
@@ -306,18 +307,14 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($application->hasOption('foo'));
     }
 
-    /**
-     * @group ZF-10898
-     */
+    #[Group('ZF-10898')]
     public function testPassingStringIniDistfileConfigPathOptionToConstructorShouldLoadOptions()
     {
         $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.ini.dist');
         $this->assertTrue($application->hasOption('foo'));
     }
 
-    /**
-     * @group ZF-10898
-     */
+    #[Group('ZF-10898')]
     public function testPassingArrayOptionsWithConfigKeyDistfileShouldLoadOptions()
     {
         $application = new Zend_Application('testing', array('bar' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.ini.dist'));
@@ -325,27 +322,21 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($application->hasOption('bar'));
     }
 
-    /**
-     * @group ZF-10568
-     */
+    #[Group('ZF-10568')]
     public function testPassingStringYamlConfigPathOptionToConstructorShouldLoadOptions()
     {
         $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.yaml');
         $this->assertTrue($application->hasOption('foo'));
     }
 
-    /**
-     * @group ZF-10568
-     */
+    #[Group('ZF-10568')]
     public function testPassingStringJsonConfigPathOptionToConstructorShouldLoadOptions()
     {
         $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.json');
         $this->assertTrue($application->hasOption('foo'));
     }
 
-    /**
-     * @group ZF-11425
-     */
+    #[Group('ZF-11425')]
     public function testPassingStringYmlConfigPathOptionToConstructorShouldLoadOptionsAsYaml()
     {
         $application = new Zend_Application('testing', dirname(__FILE__) . '/_files/appconfig.yml');
@@ -361,8 +352,9 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
 
     /**
      * This was changed to have the passed in array always overwrite the config file.
-     * @group ZF-6811
+
      */
+    #[Group('ZF-6811')]
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptionsAndNotOverride()
     {
         $application = new Zend_Application('testing', array('foo' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.inc'));
@@ -452,9 +444,7 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
         $this->assertSame(array_keys($options), array_keys($setOptions));
     }
 
-    /**
-     * @group ZF-6679
-     */
+    #[Group('ZF-6679')]
     public function testSetOptionsShouldProperlyMergeTwoConfigFileOptions()
     {
         $application = new Zend_Application(
@@ -486,9 +476,7 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
         $this->assertStringContainsString($latest, $actual);
     }
 
-    /**
-     * @group ZF-7742
-     */
+    #[Group('ZF-7742')]
     public function testHasOptionShouldTreatOptionKeysAsCaseInsensitive()
     {
         $application = new Zend_Application('production', array(
@@ -497,9 +485,7 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($application->hasOption('FooBar'));
     }
 
-    /**
-     * @group ZF-7742
-     */
+    #[Group('ZF-7742')]
     public function testGetOptionShouldTreatOptionKeysAsCaseInsensitive()
     {
         $application = new Zend_Application('production', array(
@@ -508,9 +494,7 @@ class Zend_Application_ApplicationTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('baz', $application->getOption('FooBar'));
     }
 
-    /**
-     * @group ZF-6618
-     */
+    #[Group('ZF-6618')]
     public function testCanExecuteBoostrapResourceViaApplicationInstanceBootstrapMethod()
     {
         $application = new Zend_Application(
